@@ -32,8 +32,8 @@ vim.keymap.set({'n', 'i'}, '<right>', '<nop')
 -- }}}
 
 -- always global moves {{{
-vim.keymap.set('n', 'j', 'gj')
-vim.keymap.set('n', 'k', 'gk')
+vim.keymap.set( {'n', 'v'}, 'j', 'gj')
+vim.keymap.set( {'n', 'v'}, 'k', 'gk')
 -- }}}
 
 -- map tab to move between windows {{{
