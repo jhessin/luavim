@@ -3,9 +3,22 @@ local vimp = require('vimp')
 
 -- Clear all mappings for a clean slate!
 -- vim.cmd('mapclear')
+--
+function openFile(file)
+  if vim.g.vscode then
+    vim.fn.call('VSCodeExtensionNotify', {
+      'open-file',
+      file
+    })
+  else
+    vim.cmd.edit(vim.fn.expand(file))
+  end
+end
 
 -- Quickly edit/source the vimrc {{{
-vimp.nnoremap('<leader>ev', ':e $MYVIMRC<cr>')
+vimp.nnoremap('<leader>ev', function ()
+	openFile(vim.fn.expand('$MYVIMRC'))
+end)
 -- vimp.nnoremap('<leader>sv', '<cmd>source $MYVIMRC<cr>')
 vimp.nnoremap('<leader>sv', function ()
   -- Remove all previously added vimpeccable maps
