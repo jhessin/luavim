@@ -1,5 +1,6 @@
 -- Format options {{{
 -- See ':h fo-table' for more info on these options.
+vim.o.modeline = true
 vim.o.relativenumber = false
 vim.o.number = true
 vim.o.wrap = true

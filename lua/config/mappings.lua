@@ -4,9 +4,10 @@ local vimp = require('vimp')
 -- Clear all mappings for a clean slate!
 -- vim.cmd('mapclear')
 --
+-- Function for opening files {{{
 function openFile(file)
   if vim.g.vscode then
-    vim.fn.call('VSCodeExtensionNotify', {
+    vim.call('VSCodeExtensionNotify', {
       'open-file',
       file
     })
@@ -14,6 +15,7 @@ function openFile(file)
     vim.cmd.edit(vim.fn.expand(file))
   end
 end
+-- }}}
 
 -- Quickly edit/source the vimrc {{{
 vimp.nnoremap('<leader>ev', function ()
@@ -43,10 +45,46 @@ vim.keymap.set({'n', 'i'}, '<down>', '<nop')
 vim.keymap.set({'n', 'i'}, '<left>', '<nop')
 vim.keymap.set({'n', 'i'}, '<right>', '<nop')
 -- }}}
+--
+-- VSCode specific bindings {{{
+if vim.g.vscode then
+  vimp.nnoremap('zM', 
+  function ()
+    vim.call('VSCodeNotify', 'editor.foldAll')
+  end)
+  vimp.nnoremap('zR', function ()
+    vim.call('VSCodeNotify', 'editor.unfoldAll')
+  end)
+  vimp.nnoremap('zc', function ()
+    vim.call('VSCodeNotify', 'editor.fold')
+  end)
+  vimp.nnoremap('zC', function ()
+    vim.call('VSCodeNotify', 'editor.foldRecursively')
+  end)
+  vimp.nnoremap('zo', function ()
+    vim.call('VSCodeNotify', 'editor.unfold')
+  end)
+  vimp.nnoremap('zO', function ()
+    vim.call('VSCodeNotify', 'editor.unfoldRecursively')
+  end)
+  vimp.nnoremap('za', function ()
+    vim.call('VSCodeNotify', 'editor.toggleFold')
+  end)
+end
+-- }}}
 
 -- always global moves {{{
+if vim.g.vscode then
+  vim.keymap.set( {'n', 'v'}, 'j', function ()
+    vim.call('VSCodeNotify', 'cursorDown')
+  end )
+  vim.keymap.set( {'n', 'v'}, 'k', function ()
+    vim.call('VSCodeNotify', 'cursorUp')
+  end )
+else
 vim.keymap.set( {'n', 'v'}, 'j', 'gj')
 vim.keymap.set( {'n', 'v'}, 'k', 'gk')
+end
 -- }}}
 
 -- map tab to move between windows {{{
