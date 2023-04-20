@@ -1,4 +1,6 @@
-require 'paq' {
+local paq = require('paq')
+
+paq:setup { verbose = true } {
 	'savq/paq-nvim', 			-- Let Paq manage itself
 	--------------------------------------------------------------------
 	-- LSP Support {{{
@@ -53,6 +55,6 @@ require 'paq' {
 
 }
 
--- vim.cmd('PaqSync')
+-- paq:sync()
 
 -- vim:fdm=marker:fdl=0
