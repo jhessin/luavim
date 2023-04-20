@@ -1,3 +1,4 @@
+vim.loader.enable()
 -- Set the leaders because they are used for plugins {{{
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ','
