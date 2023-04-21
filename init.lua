@@ -1,4 +1,6 @@
-vim.loader.enable()
+if vim.version().api_level >= 11 then
+  vim.loader.enable()
+end
 -- Set the leaders because they are used for plugins {{{
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ','
